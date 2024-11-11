@@ -1,23 +1,18 @@
 import express from "express";
+import { login, logout, signup } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
 //create a route
 //root route
 //.get method "listens" for when a request is inbound from the specified path
-router.get("/signup", (req,res) => {
-    res.send('Signup route');
-});
+router.get("/signup", signup);
 
 //login route, api and version number for best practice
-router.get("/login", (req,res) => {
-    res.send('Login route');
-});
+router.get("/login", login);
 
 
 //logout route
-router.get("/logout", (req,res) => {
-    res.send('Logout route');
-});
+router.get("/logout", logout);
 
 export default router;
