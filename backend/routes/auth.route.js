@@ -11,7 +11,6 @@ router.get("/signup", signup);
 //login route, api and version number for best practice
 router.get("/login", login);
 
-
 //logout route
 router.get("/logout", logout);
 
