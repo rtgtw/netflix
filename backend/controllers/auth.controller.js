@@ -79,14 +79,13 @@ export async function signup(req,res){
 
     //save to the DB
    
-
- 
-
     } catch (error) {
         console.log("Error in signup controller "+ error.message);
         res.status(500).json({success:false, message: "Internal server error"});
     }
 };
+
+
 
 export async function login(req,res){
     try {
@@ -97,9 +96,33 @@ export async function login(req,res){
             return res.status(400).json({success:false, message: "all fields are required"});
         }
 
-        const user = await User
+        const user = await User.findOne({email:email});
+
+        if(!user){
+            return res.status(404).json({success: false, message: "invalid credentials"});
+        }
+
+        const isPasswordCororect = await bcryptjs.compare(password, user.password);
+
+        if(!isPasswordCororect){
+            return res.status(400).json({success: false, message: "invalid credentails"});
+        }
+
+    //if they pass the check, generate a token and set the cookie
+    generateTokenAndSetCookie(user._id, res);
+
+
+    res.status(200).json({
+        success:true,
+        user:{
+            ...user._doc,
+            password:""
+        }
+    })
+
     } catch (error) {
-        
+        console.log("Error in login controller ", error.message);
+        res.status(500).json({success:false, message:"Internal server error"});
     }
 }
 
