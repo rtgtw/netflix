@@ -1,3 +1,4 @@
+import { generateTokenAndSetCookie } from "../config/utils/generateToken.js";
 import { User } from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 
@@ -61,14 +62,25 @@ export async function signup(req,res){
         image:image
     });
 
-    //save to the DB
-    await newUser.save();
+ 
+        //generate token, return token, and also create a cookie in the response
+        generateTokenAndSetCookie(newUser._id,res);
 
-    //return a response to the client, 201 means something was created
-    res.status(201).json({success:true, user: {
+        //save the user in the db
+        await newUser.save();
+
+
+           //return a response to the client, 201 means something was created
+        res.status(201).json({success:true, user: {
         ...newUser._doc,
         password:""
-    } });
+         } });
+    
+
+    //save to the DB
+   
+
+ 
 
     } catch (error) {
         console.log("Error in signup controller "+ error.message);
@@ -77,9 +89,28 @@ export async function signup(req,res){
 };
 
 export async function login(req,res){
-    res.send('Login route');
+    try {
+        //get the email and the password
+        const {email, password} = req.body;
+
+        if(!email || !password){
+            return res.status(400).json({success:false, message: "all fields are required"});
+        }
+
+        const user = await User
+    } catch (error) {
+        
+    }
 }
 
+
+//clear the cookies
 export async function logout(req,res){
-    res.send('Logout route');
+    try {
+        res.clearCookie("jwt-netflix");
+        res.status(200).json({success:true, message: "Logged out successfuly"});
+    } catch (error) {
+        console.log("Error in log out controller", error.message);
+        res.status(500).json({success: false, message: "Internal server error"});
+    }
 }
