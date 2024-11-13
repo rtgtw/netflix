@@ -12,8 +12,6 @@ const router = express.Router();
 //we just want one trending movie, so singular for the method
 router.get("/trending", getTrendingMovie);
 
-
-
 //create a route for trailers, can use :id to place a dynamic value
 router.get("/:id/trailers", getMovieTrailers);
 
