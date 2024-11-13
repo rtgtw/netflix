@@ -61,6 +61,7 @@ export async function getMovieDetails(req,res){
 }
 
 
+
 export async function getSimilarMovies(req,res){
         //https://api.themoviedb.org/3/movie/movie_id/similar?language=en-US&page=1
     const {id} = req.params;
