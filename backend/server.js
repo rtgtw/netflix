@@ -1,7 +1,9 @@
 import express from 'express';
 
+//these are the full router objects in here
 import authRoutes from './routes/auth.route.js';
 import movieRoutes from './routes/movie.route.js';
+import tvRoutes from './routes/tv.route.js';
 
 import {ENV_VARS} from './config/envVars.js';
 import { connectDB } from './config/db.js';
@@ -15,8 +17,10 @@ const PORT = ENV_VARS.PORT;
 app.use(express.json());
 
 //mounting routes to base path
+//imported router objects gets mounted with all of their routes inside of it
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/movie", movieRoutes);
+app.use("/api/v1/tv", tvRoutes);
 
 //use the methods from the express library 
 //listen on port 5000
