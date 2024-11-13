@@ -13,6 +13,7 @@ const router = express.Router();
 router.get("/trending", getTrendingMovie);
 
 
+
 //create a route for trailers, can use :id to place a dynamic value
 router.get("/:id/trailers", getMovieTrailers);
 
