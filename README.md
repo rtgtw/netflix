@@ -1,6 +1,6 @@
 
-<div style="text-align: center;">
- <img src="./frontend/public/netflix-logo.png" alt="netflix logo" width="250"/>
+<div align="center" style="text-align: center;">
+ <img src="./frontend/public/netflix-logo.png" alt="netflix logo" width="500"/>
  </div>
 
  
