@@ -12,7 +12,6 @@ const HomePage = () => {
   return (
     <div>
 
-      Hi
       {user ? <HomeScreen/> : <AuthScreen/>}
     </div>
   )
