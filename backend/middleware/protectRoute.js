@@ -28,7 +28,7 @@ export const protectRoute = async (req, res, next) => {
         const user = await User.findById(decoded.userId).select("-password");
 
         if(!user){
-            return res.status(404).json({success:false, message: "User not foundm"});
+            return res.status(404).json({success:false, message: "User not found"});
         }
 
         //since we already found the user inside of the middleware, we can attach this information to the request

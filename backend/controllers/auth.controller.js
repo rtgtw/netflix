@@ -111,6 +111,7 @@ export async function login(req,res){
         }
 
     //if they pass the check, generate a token and set the cookie
+    //this returns the token but we dont really need to for now, doesnt have to return it
     generateTokenAndSetCookie(user._id, res);
 
 
@@ -119,7 +120,8 @@ export async function login(req,res){
         user:{
             ...user._doc,
             password:""
-        }
+        },
+        message:"logged in"
     })
 
     } catch (error) {

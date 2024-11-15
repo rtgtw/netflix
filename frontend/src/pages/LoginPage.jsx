@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../store/authUser';
 
 
 
@@ -13,10 +14,17 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    //email and password are controlled elements by react, can take directly from them, b/c of useState
+    //create the hook login variable outside of handleLogin
+    const {login} = useAuthStore();
+
+
 
     const handleLogin = (e) => {
       e.preventDefault();
-      console.log(email,password);
+     
+     //pass in email and password to login function in the authStore
+     login({email,password});
     }
     
 

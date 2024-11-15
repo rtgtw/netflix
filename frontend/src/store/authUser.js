@@ -17,6 +17,9 @@ export const useAuthStore = create((set,get) => ({
     //loading sign out
     isLoggingOut:false,
 
+    //loading sign in
+    isLoggingIn: false,
+
     signup: async (credentials) => {
 
         //loading, fetching the information
@@ -50,7 +53,32 @@ export const useAuthStore = create((set,get) => ({
         //get the updated value of user directly from the userStore with getState()
         console.log(get().user);
     },
-    login: async () => {},
+    login: async (credentials) => {
+        //change loading to true w/ set
+        set({isLoggingIn:true});
+
+        try {
+            //we passed in the parameters so now we use those credentials to login the backend
+            //second parameter is what we are passing into the JSON body, in this case the cred objects email/pass
+            const response = await axios.post("/api/v1/auth/login", credentials);
+
+            //change the user object based on the response from the backend
+            set({user: response.data.user});
+
+            toast.success("Successfully logged in");
+            set({isLoggingIn:false});
+        } catch (error) {
+
+            set({isLoggingIn:false});
+            toast.error(error.message);
+            
+            
+        }
+
+    },
+
+
+
     logout: async () => {
 
         set({isLoggingOut:true});
