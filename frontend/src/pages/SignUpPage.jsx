@@ -1,19 +1,34 @@
 //react arrow function export component , rafec
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuthStore } from '../store/authUser';
 
 const SignUpPage = () => {
 
-    const [email, setEmail] = useState("");
+    //url object which holds info about the URL, document.location is this current url
+    //pull searchParams to get the query parameters
+    //we pass the email query parameter as the initial value,
+    //this way when someone enters from the auth page and enters an email, the init value will be
+    //that query parameter
+    const {searchParams} = new URL(document.location);
+    const emailValue = searchParams.get('email');
+
+
+    //can use or to give another value if null
+    const [email, setEmail] = useState(emailValue || "");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+
+    const {signup} = useAuthStore();
 
 
     const handleSignup = (e) => {
       //stops the page from refreshing after submission
       e.preventDefault();
-      // console.log(e);
-      // console.log(email,username, password);
+      
+      //now we can call the sign up function and pass the values into it as parameters as a single object
+      signup({email,username,password});
     };
 
   return (

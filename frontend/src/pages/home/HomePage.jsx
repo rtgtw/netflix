@@ -1,6 +1,7 @@
 import React from 'react'
 import HomeScreen from './HomeScreen';
 import AuthScreen from './AuthScreen';
+import { useAuthStore } from '../../store/authUser';
 
 
 //h- is height
@@ -8,13 +9,9 @@ import AuthScreen from './AuthScreen';
 const HomePage = () => {
 
 
-  const user = false;
-  return (
-    <div>
-
-      {user ? <HomeScreen/> : <AuthScreen/>}
-    </div>
-  )
+  const {user} = useAuthStore();
+  return <>{user ? <HomeScreen/> : <AuthScreen/>}</>
+  
   
 }
 

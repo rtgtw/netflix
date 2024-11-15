@@ -12,14 +12,14 @@
 
 ## Project Overview
 
-This project is a recreation of Netflix’s user interface, featuring MongoDB, Express.js, React, Node.js (MERN). It includes user authentication (Signup/Login), browse TV shows, Movies, actors/actresses through the search functionality, watch trailers, and view insights on video data.
+This project is a recreation of Netflix’s user interface, featuring MongoDB, Express.js, React, Node.js (MERN). It includes user authentication (Signup/Login), browse TV shows, Movies, Actors/Actresses through the search functionality, watch trailers, and view insights on video data.
 
 ## Features
 
 - **User Authentication**
 - **Browse Movies, TV Shows, Actors/Actresses**
 
-- **Search Functionality**c
+- **Search Functionality**
 - **Responsive Design**
 
 ### Home Page

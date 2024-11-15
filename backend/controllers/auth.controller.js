@@ -7,6 +7,8 @@ export async function signup(req,res){
         //client wants to send us creds, username, email, pass
         const {email,password,username} = req.body;
 
+        console.log("/SIGNUP TRIGGERED! OBJECT RECEIVED: " + req.body.email);
+
         //first we have to check if the user passed all of the necessary values
         if(!email || !password || !username){
             return res.status(400).json({success:false, message: "All fields are required"});
@@ -49,8 +51,8 @@ export async function signup(req,res){
     //get a random profile picture
     const PROFILE_PICS = ["/avatar1.png", "/avatar2.ping", "/avatar3.png"];
 
-    // const image = PROFILE_PICS[Math.floor(Math.random() * PROFILE_PICS.length)];
-    const image = "";
+    const image = PROFILE_PICS[Math.floor(Math.random() * PROFILE_PICS.length)];
+  
 
 
     //if everything passes, create the user profile
@@ -71,7 +73,7 @@ export async function signup(req,res){
 
 
            //return a response to the client, 201 means something was created
-        res.status(201).json({success:true, user: {
+        res.status(201).json({success:true, message:`${username} has been created into the system`,user: {
         ...newUser._doc,
         password:""
          } });
@@ -132,8 +134,22 @@ export async function logout(req,res){
     try {
         res.clearCookie("jwt-netflix");
         res.status(200).json({success:true, message: "Logged out successfuly"});
+        console.log(`${req}`);
+        
     } catch (error) {
         console.log("Error in log out controller", error.message);
         res.status(500).json({success: false, message: "Internal server error"});
+    }
+}
+
+
+export async function authCheck(req,res){
+    try {
+        //return the user
+        res.status(200).json({success:true, user:req.user});
+    } catch (error) {
+        console.log("error in authCheck controller");
+        res.status(500).json({success:false, message:"Internal server error"});
+        
     }
 }
