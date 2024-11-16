@@ -42,7 +42,7 @@ export const useAuthStore = create((set,get) => ({
 
             //error icon
             //at first had an error here b/c there was no message on success
-            toast.error( error.response.data.message || "An error has occured");
+            toast.error( error.response.data.message || "Signn up failed");
           
            
 
@@ -69,8 +69,8 @@ export const useAuthStore = create((set,get) => ({
             set({isLoggingIn:false});
         } catch (error) {
 
-            set({isLoggingIn:false});
-            toast.error(error.message);
+            set({isLoggingIn:false, user:null});
+            toast.error(error.response.data.message || "Login failed");
             
             
         }

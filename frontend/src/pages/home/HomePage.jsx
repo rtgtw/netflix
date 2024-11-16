@@ -10,7 +10,7 @@ const HomePage = () => {
 
 
   const {user} = useAuthStore();
-  return <>{user ? <HomeScreen/> : <AuthScreen/>}</>
+  return <> {user ? <HomeScreen/> : <AuthScreen/>}</>
   
   
 }
