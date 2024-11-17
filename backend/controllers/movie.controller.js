@@ -6,6 +6,8 @@ import { fetchFromTMDB } from "../services/tmdb.service.js";
 export async function getTrendingMovie(req,res){
     try {
 
+        console.log("entered");
+
         
 
         //pass the URL for the data

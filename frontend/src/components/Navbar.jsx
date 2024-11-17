@@ -4,6 +4,7 @@ import { Search, LogOut, Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
+import { useContentStore } from "../store/content";
 
 const Navbar = () => {
 
@@ -19,7 +20,12 @@ const Navbar = () => {
     
 
      const {user, logout} =  useAuthStore();
+     
 
+        const { contentType, setContentType}  = useContentStore();
+       
+
+       
 
   
 
@@ -35,11 +41,11 @@ const Navbar = () => {
                     {/* Desktop navbar */}
                     <div className="hidden sm:flex gap-2 items-center">
 
-                        <Link to={"/"} className="hover:underline">
+                        <Link to={"/"} className="hover:underline" onClick={() => setContentType("movie")}>
                             Movies
                         </Link>
 
-                        <Link to={"/"} className="hover:underline">
+                        <Link to={"/"} className="hover:underline" onClick={() => setContentType("tv")}>
                             Tv Shows
                         </Link>
 
@@ -58,7 +64,8 @@ const Navbar = () => {
                         <Link to={"/search"}>
                         <Search className="size-6 cursor-pointer"/>
                         </Link>
-                        {/*  */}
+
+                        {/*  Icon*/}
                         <img src={user.image} alt="Avatar" className="h-8 rounded cursor-pointer"/>
 
                         <LogOut className="size-6 cursor-pointer " onClick={logout}/>
