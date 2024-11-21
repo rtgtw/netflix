@@ -1,15 +1,19 @@
-import React from 'react'
-import { useAuthStore } from '../../store/authUser'
+import React from 'react';
+import { useAuthStore } from '../../store/authUser';
 import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
 import { Info, Play } from 'lucide-react';
 import useGetTrendingContent from '../../hooks/useGetTrendingContent.js';
-import { ORIGINAL_IMG_BASE_URL } from '../../utils/constants.js';
+import { MOVIE_CATEGORIES, ORIGINAL_IMG_BASE_URL, TV_CATEGORIES } from '../../utils/constants.js';
+import { useContentStore } from '../../store/content.js';
+import MovieSlider from '../../components/MovieSlider.jsx';
 
 
 const HomeScreen = () => {
 
   const {trendingContent} = useGetTrendingContent();
+
+  const {contentType} = useContentStore();
 
 
 
@@ -67,7 +71,21 @@ const HomeScreen = () => {
           </div>
       </div>
 
-      <div></div>
+      <div className='flex flex-col gap-10 bg-black py-10'>
+        
+        {contentType === "movie" ? (
+          MOVIE_CATEGORIES.map((category) => {
+            //return a movie slider component for each category
+            return <MovieSlider key={category} category={category}/>
+          })
+        ): (
+          TV_CATEGORIES.map((category) => {
+            //return a movie slider component for each category
+            return <MovieSlider key={category} category={category}/>
+          })
+        )}
+
+      </div>
 
     </>
   )

@@ -19,10 +19,14 @@ const useGetTrendingContent = () => {
        setTrendingContent(response.data.content);
     }
 
+    //by triggering this, this sets Trending Content, then we just return trending content
+    //as an object
     getTrendingContent();
   
     //every time contentType changes, when we flip from Movies tab to TV shows tab, run this useEffect function,
     //which fetches based on if its tv show or movie
+    //so everytime the tab is flipped, content type changes back and forth
+    //everytime its triggered, the code in useEffect triggers as well
 
    }, [contentType]);
 
