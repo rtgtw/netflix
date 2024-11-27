@@ -13,7 +13,7 @@ export const connectDB = async () => {
        const conn =  await mongoose.connect(ENV_VARS.MONGO_URI);
        console.log("MongoDB Connected " + conn.connection.host);
     } catch (error) {
-        console.error("Error connecting to mongo do: " + error.message);
+        console.error("Error connecting to mongo db: " + error.message);
         process.exit(1); //1 means there was an error, 0 means success
     }
 }
